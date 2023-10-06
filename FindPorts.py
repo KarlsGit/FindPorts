@@ -7,12 +7,15 @@ Usage:
   python FindPorts.py < log3
 
 Discussion:
-  From the samples provided, all port numbers are preceded by ‘port’ which makes it easier to find a port
+  From the samples provided, most port numbers are preceded by ‘port’ which makes it easier to find a port
   rather than any number from 1-65535 which may not be a port.  The characters between port and the number
   were ‘ ‘, ‘:’ and ‘”’.  We could have looked for exactly those and limited to 1-2 characters but allowing
   any characters between 0-3 seems like it will catch more port numbers as the variety of characters is
   potentially bigger than in the samples.  I've seen more accurate expressions that only capture 1-65535 but,
   if you find ‘port’ followed by a 1-5-digit number, then it might warrant inspection even if out of range.
+
+  The exception to the above is syslog contains 'service:' followed by a value.  If it's numeric, then
+  it's a port.  The expression looks for either 'port' OR the 'service' port.
 """
 
 import re
